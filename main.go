@@ -195,9 +195,9 @@ func ketnoidata(txname string) {
 }
 func main() {
 
-	port := os.Getenv("PORT")
-    	if port == " " {
-    	   port = "4000"
+	appPort := ":" + os.Getenv("PORT")
+	if appPort == ":" {
+	        appPort = ":4000" // Cổng mặc định nếu không có biến môi trường
 	}
 	fmt.Printf("Port : %s \n", port)
 	token := "0:2212fce3578671c9c4c8577a658a5c444d071dbeb9ce47b9850ef0047be9e342,0:948673a596fc6d2c3123dfff64d3231e4d0e16bfaac506d5ebdb09f32b3b9c65"
@@ -214,8 +214,8 @@ func main() {
 	//gobot("asasas")
 	//go ketnoidata("haimeo", 9999999)
 	s := &http.Server{
-        	Addr: port,
-   	}
+        	Addr: appPort,
+    	}
     	log.Fatal(s.ListenAndServe())
 	select {}
 
