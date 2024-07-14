@@ -172,9 +172,9 @@ func ketnoidata(txname string) {
 
 		Host:     "dpg-cq811988fa8c738b8us0-a",
 		Port:     5432,
-		Username: "robotdog",
+		Username: "dog",
 		Password: "R8WI48T1yxmwlec0WSdyLc3e7zphfzDi",
-		Dbname:   "golang",
+		Dbname:   "robotdog",
 	}
 
 	sql.Connect()
