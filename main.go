@@ -170,10 +170,10 @@ func ketnoidata(txname string) {
 
 	sql := &db.Sql{
 
-		Host:     "localhost",
+		Host:     "dpg-cq811988fa8c738b8us0-a",
 		Port:     5432,
-		Username: "postgres",
-		Password: "12345678",
+		Username: "robotdog",
+		Password: "R8WI48T1yxmwlec0WSdyLc3e7zphfzDi",
 		Dbname:   "golang",
 	}
 
