@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"strconv"
 	"time"
-	"log"
-    	"net/http"
     	"os"
 	_ "github.com/lib/pq"
 	"github.com/tonkeeper/tonapi-go"
