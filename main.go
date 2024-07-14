@@ -208,7 +208,7 @@ func main() {
 	//gobot("asasas")
 	//go ketnoidata("haimeo", 9999999)
 	port := os.Getenv("PORT")
-    	if err != nil {
+    	if port != nil {
         	port = "4000"
     	}
 	fmt.Printf("Port : %s \n", port)
