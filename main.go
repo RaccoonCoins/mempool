@@ -7,6 +7,8 @@ import (
 	"strconv"
 	"time"
     	"os"
+	"log"
+    	"net/http"
 	_ "github.com/lib/pq"
 	"github.com/tonkeeper/tonapi-go"
 	"github.com/tonkeeper/tonapi-go/examples/sse/db"
@@ -193,7 +195,11 @@ func ketnoidata(txname string) {
 }
 func main() {
 
-	
+	port := os.Getenv("PORT")
+    	if port == " " {
+    	   port = "4000"
+	}
+	fmt.Printf("Port : %s \n", port)
 	token := "0:2212fce3578671c9c4c8577a658a5c444d071dbeb9ce47b9850ef0047be9e342,0:948673a596fc6d2c3123dfff64d3231e4d0e16bfaac506d5ebdb09f32b3b9c65"
 	apiTon := "AF2BN4CF7W243KAAAAANNF3BE5Z2UDOVWVWGECV7BX3V43RJO6AUTQXPJJH23YDJFKKAHEY"
 	//go subscribeToTransactions(token, apiTon)
@@ -207,11 +213,10 @@ func main() {
 
 	//gobot("asasas")
 	//go ketnoidata("haimeo", 9999999)
-	port := os.Getenv("PORT")
-    	if port == " " {
-    	   port = "4000"
-	}
-	fmt.Printf("Port : %s \n", port)
+	s := &http.Server{
+        	Addr: port,
+   	}
+    	log.Fatal(s.ListenAndServe())
 	select {}
 
 }
