@@ -45,9 +45,9 @@ func subscribeToMempool(token string, apiTon string) {
 		err := streamingAPI.SubscribeToMempool(context.Background(),
 			[]string{token},
 			func(data tonapi.MempoolEventData) {
-				value, _ := json.Marshal(data.BOC)
+				value, _ := json.Marshal(data)
 				//decodedBytes, err1 := hex.DecodeString(string(value))
-				fmt.Printf("mempool event: %#v\n", string(value))
+				fmt.Printf("mempool event: %#v\n", value)
 
 			})
 		if err != nil {
@@ -69,7 +69,7 @@ func subscribeToTransactions(token string, apiTon string) {
 			})
 		if err != nil {
 			fmt.Printf("tx error: %v, reconnecting...\n", err)
-			time.Sleep(5 * time.Second) // wait for 5 seconds before retrying
+			//time.Sleep(5 * time.Second) // wait for 5 seconds before retrying
 		}
 	}
 }
@@ -148,7 +148,7 @@ func subscribeToTraces(token string, apiTon string) {
 				}*/
 
 				fmt.Printf("New trace with hash: %v\n", data.Hash)
-				ketnoidata(data.Hash)
+				//ketnoidata(data.Hash)
 			})
 		if err != nil {
 			fmt.Printf("trace error: %v, reconnecting...\n", err)
@@ -203,17 +203,12 @@ func main() {
 	fmt.Printf("Port : %s \n", appPort)
 	token := "0:2212fce3578671c9c4c8577a658a5c444d071dbeb9ce47b9850ef0047be9e342,0:948673a596fc6d2c3123dfff64d3231e4d0e16bfaac506d5ebdb09f32b3b9c65"
 	apiTon := "AF2BN4CF7W243KAAAAANNF3BE5Z2UDOVWVWGECV7BX3V43RJO6AUTQXPJJH23YDJFKKAHEY"
-	//go subscribeToTransactions(token, apiTon)
+
 	go subscribeToTraces(token, apiTon)
-	//go subscribeToMempool(token, apiTon)
-
+	go subscribeToMempool(token, apiTon)
+	go subscribeToTransactions(token, apiTon)
 	go subscribeToBlocks(token, apiTon)
-	//go printAccountInformation(myAccount)
-	//go GetBlockchainTransaction("e08ddf584a8908f1df4c379d3ce2c650eddd09aaa3f26d6798ffd9e0355be225")
-	//go gobot()
-
-	//gobot("asasas")
-	//go ketnoidata("haimeo", 9999999)
+	
 	s := &http.Server{
 		Addr: appPort,
 	}
