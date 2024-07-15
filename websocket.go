@@ -10,7 +10,7 @@ import (
 	"github.com/tonkeeper/tonapi-go"
 )
 
-func main() {
+func websocket() {
 	appPort := ":" + os.Getenv("PORT")
 	if appPort == ":" {
 		appPort = ":4000" // Cổng mặc định nếu không có biến môi trường
